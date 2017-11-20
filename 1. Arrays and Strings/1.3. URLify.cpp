@@ -18,8 +18,12 @@ class URLify{
 	public:		
 		void convert_extra_space(string s, int l){
 			x=s;
+			int nSpace=0;
 			for(int i=0;i<l;i++){
-				if(s[i]==' ') x=x.substr(0,i)+"%20"+s.substr(i+1);
+				if(s[i]==' ') {
+					x=x.substr(0,i+(nSpace*2))+"%20"+s.substr(i+1);
+					nSpace++;
+				}
 			}
 		}
 		
@@ -30,8 +34,8 @@ class URLify{
 					s[i--]=s[j];
 				}
 				else if(s[j]==' '){
-					s[i--]='2';
 					s[i--]='0';
+					s[i--]='2';
 					s[i--]='%';
 				}
 				j--;
