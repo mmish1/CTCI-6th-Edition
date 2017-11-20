@@ -38,17 +38,21 @@ void display(int **arr,int n){
 	cout<<endl<<endl;
 }
 
-main(){
-	int a=1,n=4;
-	int **x=new int*[n];
+void createMatrix(int **x, int n, int a){
 	for(int i=0;i<n;i++){
 		x[i]=new int[n];
 	}
-	for(int i=0;i<4;i++){
-		for(int j=0;j<4;j++){
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
 			x[i][j]=a++;
 		}
 	}
+}
+
+main(){
+	int a=1,n=4;
+	int **x=new int*[n];
+	createMatrix(x,n,a);
 	cout<<"Original matrix: "<<endl;
 	display(x,n);
 	rotateMatrix(x,n);
@@ -57,19 +61,13 @@ main(){
 	
 	a=1;
 	n=5;
-	int **y=new int*[n];
-	for(int i=0;i<n;i++){
-		y[i]=new int[n];
-	}
-	for(int i=0;i<5;i++){
-		for(int j=0;j<5;j++){
-			y[i][j]=a++;
-		}
-	}
+
+	createMatrix(x,n,a);
 	cout<<"Original matrix: "<<endl;
-	display(y,5);
-	rotateMatrix(y,5);
+	display(x,n);
+	rotateMatrix(x,n);
 	cout<<"Rotated matrix: "<<endl;
-	display(y,5);
+	display(x,n);
 	
+	return 0;
 }
