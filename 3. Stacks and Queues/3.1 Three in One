@@ -1,0 +1,119 @@
+/*Q3.1) Three in One: Describe how you could use a single array to implement three stacks. */
+
+
+#include<iostream>
+
+using namespace std;
+
+class multiStack{
+	int capacity;
+	int *nElems;
+	int *a;
+public:	
+	multiStack(int cap,int nStack){
+		capacity=cap;
+		nElems=new int[nStack];
+		for(int i=0;i<nStack;i++) nElems[i]=0;
+		a=new int[capacity*nStack];
+	}
+	
+	~multiStack(){
+		delete [] a;
+		delete [] nElems;
+	}
+	
+	int getIndexOf(int sn){
+		int x= (sn*capacity)+nElems[sn];
+		return x;
+	}
+	
+	void push(int stackNum, int d){
+		if(nElems[stackNum]==capacity){
+			cout<<"Stack "<<stackNum<<" is full!"<<endl;
+			return;
+		}
+		a[getIndexOf(stackNum)]=d;
+		nElems[stackNum]++;
+	}
+	
+	void pop(int stackNum){
+		if(nElems[stackNum]==0){
+			cout<<"Stack "<<stackNum<<" is empty!"<<endl;
+			return;
+		}
+		nElems[stackNum]--;
+	}
+	
+	int top(int stackNum){
+		if(nElems[stackNum]==0){
+			cout<<"Stack "<<stackNum<<" is empty!"<<endl;
+			return -1;
+		}
+		return a[getIndexOf(stackNum)-1];
+	}
+	
+	bool isEmpty(int stackNum){
+		if(nElems[stackNum]==0){
+			return true;
+		}
+		else return false;
+	}
+	
+	bool isFull(int stackNum){
+		if(nElems[stackNum]==capacity){
+			return true;
+		}
+		else return false;
+	}
+	
+	void dispResult(bool a){
+		if(a) cout<<"yes"<<endl;
+		else cout<<"no"<<endl;
+	}
+};
+
+
+
+main(){
+	multiStack *s=new multiStack(4,3);
+	s->pop(1);
+	s->push(0,1);
+	s->push(1,5);
+	s->push(2,9);
+	cout<<"Stack0: "<<s->top(0)<<endl;
+	cout<<"Stack1: "<<s->top(1)<<endl;
+	cout<<"Stack2: "<<s->top(2)<<endl;
+	
+	s->push(0,2);
+	s->push(0,3);
+	s->push(0,4);
+	s->push(0,5);
+	s->push(1,6);
+	s->push(1,7);
+	s->push(1,8);
+	s->push(1,9);
+	s->push(2,10);
+	s->push(2,11);
+	s->push(2,12);
+	s->push(2,13);
+	
+	cout<<"Top of Stack0: "<<s->top(0)<<endl;
+	cout<<"Top of Stack1: "<<s->top(1)<<endl;
+	cout<<"Top of Stack2: "<<s->top(2)<<endl;
+	
+	s->pop(1);
+	s->pop(1);
+	s->pop(1);
+	s->pop(1);
+	s->pop(1);
+	
+	cout<<"Is Stack1 empty? ";
+	s->dispResult(s->isEmpty(1));
+	cout<<endl;
+	
+	cout<<"Is Stack2 full? ";
+	s->dispResult(s->isFull(2));
+	cout<<endl;
+	
+	return 0;
+}
