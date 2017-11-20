@@ -20,7 +20,7 @@ bool isOneEdit(string s1, string s2){
 	string b=l1<l2?s2:s1; 
 	string s=l1<l2?s1:s2;
 	int i=0,j=0;
-	cout<<s<<" "<<b<<"\n";
+	cout<<s<<" "<<b<<": ";
 	while(i<s.length() && j<b.length()){
 		if(s[i]!=b[j]){
 			if(c) {
